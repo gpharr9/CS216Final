@@ -1,0 +1,83 @@
+UML Chart
+
++Game
+ - playerInstance : Player
+ - dealerInstance : Dealer
+ - computerInstance: Computer
+ - step: int
+ + validateState(): func
+ + verifyUser(): func
+
+
++GUI
+- gameState: Game
+ - displayRules(string)
+ - displayCard()
+ - buttonTrigger()
+ - displayWinLose()
+
+
++Player
+ - currentHand: Hand
+ - dealer: Dealer
+ + collectInput(): func
+
+
++Computer extend Player
++ step(): func
+
+
++Hand
+ - cardArr: Card[]
+ + generateCards(): func
+ + validateCard(): func
+ + print(): func
+
+
++Card
+ - type: int
+ + print(): func
+
+
++Dealer
+- currentHand: Hand
+ + hit(): func
+ + stand(): func
+ + split(): func
+
+
+--------------------------------------------
+Rules and Logic
+The goal of blackjack is to beat the dealer's hand without going over 21.
+Face cards are worth 10. Aces are worth 1 or 11 based on what makes a better hand.
+Each player starts with two cards, one of the dealer's cards is hidden until the end.
+To 'Hit' is to ask for another card. To 'Stand' is to hold your total and end your turn.
+If you go over 21 you bust, and the dealer wins regardless of the dealer's hand.
+Blackjack usually means you win 1.5 the amount of your bet. Depends on the casino.
+Dealer will hit until his/her cards total 17 or higher.
+Doubling is like a hit, only the bet is doubled and you only get one more card.
+Split can be done when you have two of the same card - the pair is split into two hands.
+Splitting also doubles the bet, because each new hand is worth the original bet.
+You can only double/split on the first move, or first move of a hand created by a split.
+You cannot play on two aces after they are split.
+You can double on a hand resulting from a split, tripling or quadrupling you bet.
+
+
+Computer/Dealer will hit at anything lower than 17 total value
+Computer/Dealer will stand once total card value exceeds 17
+Computer/Dealer will not split
+
+Player can decide whether ace is counted as 11 or 1 when drawn
+Dealer/Computer will decide based on total card value
+
+Dealer/Computer will use a static bet
+Player bet can be any postive real number
+----------------------------------------------
+Game Flow:
+    Prompt user to play or watch computer
+    Display buttons and game view
+    for every game step:
+    display current player/computer hand , display dealers hand
+    check for user / computer input
+    validate game state
+    check for win / loss

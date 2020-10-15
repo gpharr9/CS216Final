@@ -48,6 +48,7 @@ UML Chart
 
 --------------------------------------------
 Rules and Logic
+(Rules sourced from http://www.hitorstand.net/strategy.php)
 The goal of blackjack is to beat the dealer's hand without going over 21.
 Face cards are worth 10. Aces are worth 1 or 11 based on what makes a better hand.
 Each player starts with two cards, one of the dealer's cards is hidden until the end.

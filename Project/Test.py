@@ -5,7 +5,7 @@ print(tempHand.hand)
 
 while True:
   print("Would you like to draw again? (Y/N)")
-  ui = input(); ui.lower()
+  ui = input();
 
   if ui in 'Yy':
     tempHand.addCard()

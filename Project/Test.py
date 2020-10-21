@@ -7,11 +7,11 @@ while True:
   print("Would you like to draw again? (Y/N)")
   ui = input(); ui.lower()
 
-  if ui in 'y':
+  if ui in 'Yy':
     tempHand.addCard()
     print()
     print(tempHand.hand)
-  elif ui in 'n':
+  elif ui in 'Nn':
     exit()
   else:
     print("no.")

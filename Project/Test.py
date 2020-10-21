@@ -1,20 +1,22 @@
-from Hand import Hand
+ ## Hand Test
 
-tempHand = Hand()
-print(tempHand.hand)
+# from Hand import Hand
 
-while True:
-  print("Would you like to draw again? (Y/N)")
-  ui = input();
+# tempHand = Hand()
+# print(tempHand.hand)
 
-  if ui in 'Yy':
-    tempHand.addCard()
-    print()
-    print(tempHand.hand)
-  elif ui in 'Nn':
-    exit()
-  else:
-    print("no.")
+# while True:
+#   print("Would you like to draw again? (Y/N)")
+#   ui = input();
+
+#   if ui in 'Yy':
+#     tempHand.addCard()
+#     print()
+#     print(tempHand.hand)
+#   elif ui in 'Nn':
+#     exit()
+#   else:
+#     print("no.")
 
     
  ## Player Test
@@ -24,7 +26,6 @@ player = Player()
 phand = player.create_hand()
 
 while True:
-  
   ui = player.collectinput()
 
   if ui in 'Yy':

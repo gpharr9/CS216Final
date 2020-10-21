@@ -15,3 +15,23 @@ while True:
     exit()
   else:
     print("no.")
+
+    
+ ## Player Test
+from Player import Player
+
+player = Player()
+phand = player.create_hand()
+
+while True:
+  
+  ui = player.collectinput()
+
+  if ui in 'Yy':
+    phand.addCard()
+    print()
+    print(phand.hand)
+  elif ui in 'Nn':
+    exit()
+  else:
+    print("no.")

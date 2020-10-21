@@ -2,10 +2,9 @@ from Hand import Hand
 
 class Player:
 
-  def create_hand():
+  def create_hand(self):
     hand = Hand()
-    phand = hand.hand
-    return phand
+    return hand
   
 
   def collectinput(self):

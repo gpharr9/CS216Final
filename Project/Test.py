@@ -1,13 +1,17 @@
-from Hand import *
+from Hand import Hand
 
-class Test:
-  print(hand)
-  print("Would you like to draw again?")
-  ui = input()
+tempHand = Hand()
+print(tempHand.hand)
 
-  if ui in "Yes":
-    card = Card()
-    hand.append(card.type)
-    print(hand)
-  else:
+while True:
+  print("Would you like to draw again? (Y/N)")
+  ui = input(); ui.lower()
+
+  if ui in 'y':
+    tempHand.addCard()
+    print()
+    print(tempHand.hand)
+  elif ui in 'n':
     exit()
+  else:
+    print("no.")

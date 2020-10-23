@@ -20,18 +20,19 @@
 
     
  ## Player Test
-from Player import Player
+# from Player import Player
+from Computer import Computer
 
-player = Player()
+player = Computer()
 phand = player.create_hand()
+phand.print()
 
 while True:
   ui = player.collectinput()
 
   if ui in 'Yy':
     phand.addCard()
-    print()
-    print(phand.hand)
+    phand.print()
   elif ui in 'Nn':
     exit()
   else:

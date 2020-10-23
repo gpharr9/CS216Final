@@ -1,6 +1,6 @@
 from Card import Card
 
-options = ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9", "c10", "c11", "c12", "c13", "d1", "d2", "d3", "d4", "d5", "d6", "d7", "d8", "d9", "d10", "d11", "d12", "d13", "h1", "h2", "h3", "h4", "h5", "h6", "h7", "h8", "h9", "h10", "h11", "h12", "h13", "s1", "s2", "s3", "s4", "s5", "s6", "s7", "s8", "s9", "s10", "s11", "s12", "s13"]
+options = ["c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9", "cj", "ca", "cq", "ck", "d2", "d3", "d4", "d5", "d6", "d7", "d8", "d9", "dj", "da", "dq", "dk", "h2", "h3", "h4", "h5", "h6", "h7", "h8", "h9", "hj", "ha", "hq", "hk", "s2", "s3", "s4", "s5", "s6", "s7", "s8", "s9", "sj", "sa", "sq", "sk"]
 class Hand:
   def __init__(self):
     self.hand = []
@@ -10,4 +10,13 @@ class Hand:
     card = Card(options)
     options.remove(card.type)
 
-    self.hand.append(card.type)
+    self.hand.append(card)
+
+  def print(self):
+    for i in range(0, len(self.hand)):
+      self.hand[i].print()
+
+# 10 jack
+# 11 ace
+# 12 queen
+# 13 king

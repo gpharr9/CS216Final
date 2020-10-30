@@ -5,6 +5,7 @@ class Hand:
   def __init__(self):
     self.hand = []
     self.addCard()
+    self.addCard()
 
   def addCard(self):
     card = Card(options)
@@ -12,11 +13,15 @@ class Hand:
 
     self.hand.append(card)
 
-  def print(self):
-    for i in range(0, len(self.hand)):
+  def print(self, dealer):
+    length = len(self.hand)
+    if(dealer):
+      length -= 1
+
+    for i in range(0, length):
       self.hand[i].print()
 
 # 10 jack
 # 11 ace
 # 12 queen
-# 13 king
+# 13 kinge

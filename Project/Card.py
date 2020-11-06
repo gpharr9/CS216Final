@@ -14,7 +14,7 @@ class Card:
     num  = self.type[1:].upper()
 
     if(blank):
-      num = suit = ""
+      num = suit = " "
     cardLayout = """
 ┌────────────┐
 │ {}          │

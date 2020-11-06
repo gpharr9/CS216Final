@@ -1,6 +1,7 @@
 from Player import Player
 from Dealer import Dealer
 from Computer import Computer
+from os import system
 
 class Game:
     def __init__(self):
@@ -18,20 +19,17 @@ class Game:
         self.print()
 
         # second step, prompt the user to what they want to do
-        ui = self.playerInstance.collect_input()
-        if(ui in 'Hh'):
-            self.dealerInstance.hit(self.playerInstance)
-            pCount = self.playerInstance.count_hand()
+        self.ui = self.playerInstance.collect_input()
+        pState = self.validatePlayer()
+        dState = self.validateDealer()
 
-            if(pCount > 21):
-                print("You lost, bye.")
-
-        elif(ui in 'Ss'):
-            self.makeStand()
-
+        if dState == 0 or dState == 1:
+            return dState
+        if pState == 0 or pState == 1:
+            return pState
         
-            
-        #self.print()
+        # system("cls")
+        self.print()
     
     
     def makeStand(self):
@@ -42,11 +40,11 @@ class Game:
         # print("Dealer Count: " + str(dCount))
 
         if(pCount > dCount):
-            print("Player wins")
+            return 0
         elif(pCount < dCount):
-            print("Dealer wins")
+            return 1
         elif(pCount == dCount):
-            print("Tie!")
+            return 2
     
     
     def print(self):
@@ -57,9 +55,35 @@ class Game:
         self.dealerInstance.print_hand()
 
     
-    def validateState(self):
-        print('validate')
+    def validatePlayer(self):
+        # check player count
+        if(self.ui in 'Hh'):
+            print('player hitting')
+            self.dealerInstance.hit(self.playerInstance)
+            pCount = self.playerInstance.count_hand()
+            print("Player Count: " + str(pCount))
 
+            if(pCount > 21):
+                return 1
+            elif(pCount == 21):
+                return 0
+        elif(self.ui in 'Ss'):
+            print('player makin a stand')
+            state = self.makeStand()
+            return state
 
-    def verifyUser(self):
-        print('verify')
+    def validateDealer(self):
+        # check dealer count
+        dCount = self.dealerInstance.count_hand()
+        print("Dealer Count: " +str(dCount))
+        if(dCount > 21):
+            return 0
+        elif(dCount == 21):
+            return 1
+        if(dCount < 17):
+            print('dealer hitting')
+            self.dealerInstance.hit(None)
+        elif(dCount > 17):
+            print('dealer makin a stand')
+            state = self.makeStand()
+            return state

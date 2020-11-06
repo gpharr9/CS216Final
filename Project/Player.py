@@ -21,7 +21,7 @@ class Player:
     while(ui not in "Hh" and ui not in "Ss"):
       print("Hit, or Stand (H / S): ")
       ui = input()
-      system('cls')
+      # system('cls')
 
     return ui
 

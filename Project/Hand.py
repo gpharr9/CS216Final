@@ -21,7 +21,7 @@ class Hand:
 
 
     for i in range(0, length):
-      self.hand[i].print()
+      self.hand[i].print(False)
 
 # 10 jack
 # 11 ace

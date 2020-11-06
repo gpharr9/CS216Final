@@ -8,12 +8,10 @@ class Dealer(Player):
 
   #Used when card value is lower than 17
   def hit(self, player):
-    player.hand.addCard()
-    print('hit')
-
-  #Used when card value is higher than 17
-  def stand(self, player):
-    print('stand')
+    if(player):
+      player.hand.addCard()
+    else:
+      self.hand.addCard()
 
   #Only used by player
   # deprecated for now

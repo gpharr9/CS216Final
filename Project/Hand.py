@@ -17,6 +17,8 @@ class Hand:
     length = len(self.hand)
     if(dealer):
       length -= 1
+      self.hand[1].print(True)
+
 
     for i in range(0, length):
       self.hand[i].print()

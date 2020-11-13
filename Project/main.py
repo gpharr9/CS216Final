@@ -47,7 +47,7 @@
 
 from Game import Game
 from os import system
-def rules():
+def rules(): # Outputs basic rule structure for the game
   print("=====================================================================================================")
   print("1) Blackjacks primary goal is to beat the dealers hand while keeping your hand under a total value of 21")
   print("2) Choosing hit will have you draw another card and add it to your total hands value")
@@ -55,7 +55,7 @@ def rules():
   print("=====================================================================================================")
 
 
-def user_choice():
+def user_choice(): # Collects user input for use in Player subclass
   print("Do you want to play a round (y/n)")
   state = input()
 
@@ -66,34 +66,34 @@ def user_choice():
   
 
 def main():
-  system('cls')
-  rules()
+  system('cls') # Clears terminal
+  rules() # Outputs rules
   # before start game
 
-  state = user_choice()
+  state = user_choice() # Collects input
   
   
-  count = 0
-  game = None
+  count = 0 # Sets initial turn count to zero
+  game = None # Sets initial game value to None type
   while state == True:
     if(count == 0):
       # game = None
-      game = Game()
-    status = game.next()
+      game = Game() # Creates game object
+    status = game.next() # Progresses the game
 
-    if status == 0:
+    if status == 0: # Monitors game state
       print("You win!!!")
       state = False
       # state = user_choice()
       # if state == True:
       #   count = 0
-    elif status == 1:
+    elif status == 1: # Monitors game state
       print("You lose.")
       state = False
       # state = user_choice()
       # if state == True:
       #   count = 0
-    elif status == 2:
+    elif status == 2: # Monitors game state
       print("You tied!")
       state = False
       # state = user_choice()
@@ -101,7 +101,7 @@ def main():
       #   count = 0
   
 
-    count += 1
+    count += 1 # Adds to turn count
 
 
   # game over

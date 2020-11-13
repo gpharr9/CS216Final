@@ -3,15 +3,15 @@ from Player import Player
 
 class Dealer(Player):
 
-  def print_hand(self):
+  def print_hand(self): # Output of the dealers current hand by using data made in card and hand
     self.hand.print(True)
 
-  #Used when card value is lower than 17
-  def hit(self, player):
+
+  def hit(self, player): # Adds a card to the dealers deck based on whether the deck is below 17 or not
     if(player):
-      player.hand.addCard()
+      player.hand.add_card()
     else:
-      self.hand.addCard()
+      self.hand.add_card()
 
   #Only used by player
   # deprecated for now

@@ -74,37 +74,34 @@ def main():
   
   
   count = 0 # Sets initial turn count to zero
-  game = None # Sets initial game value to None type
+  #game = None # Sets initial game value to None type
   while state == True:
     if(count == 0):
-      # game = None
+      game = None # Sets initial game value to None type
       game = Game() # Creates game object
     status = game.next() # Progresses the game
-
+    
+    count += 1
     if status == 0: # Monitors game state
       print("You win!!!")
-      state = False
-      # state = user_choice()
-      # if state == True:
-      #   count = 0
+      state = user_choice()
+      if state == True:
+        count = 0
     elif status == 1: # Monitors game state
       print("You lose.")
-      state = False
-      # state = user_choice()
-      # if state == True:
-      #   count = 0
+      state = user_choice()
+      if state == True:
+        count = 0
     elif status == 2: # Monitors game state
       print("You tied!")
-      state = False
-      # state = user_choice()
-      # if state == True:
-      #   count = 0
-  
+      state = user_choice()
+      if state == True:
+        count = 0
 
-    count += 1 # Adds to turn count
+    
 
 
   # game over
-
+  print("Thanks for playing!")
 
 main()

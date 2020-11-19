@@ -13,16 +13,17 @@ class Hand:
 
     self.hand.append(card)
 
+    
   def print(self, dealer): # Prints out the hand, with different parameters
                            # depending on whether dealer object or player object
     length = len(self.hand)
     if(dealer):
       length -= 1
-      self.hand[1].print(True)
+      print(self.hand[1].get_card(True))
 
 
     for i in range(0, length):
-      self.hand[i].print(False)
+      print(self.hand[i].get_card(False))
 
 # 10 jack
 # 11 ace

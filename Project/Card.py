@@ -4,8 +4,8 @@ class Card:
   def __init__(self, _options): # Preparation of type variable passed in Hand options
     self.type = _options[randrange(len(_options))]
 
-  def print(self, blank): # Assigning of suit visuals
-                          # Break up logic and output to allow unit testing
+  def get_card(self, blank): # Assigning of suit visuals
+                          
     suit = self.type[0]
     if(suit == 'c'):   suit = '♣' 
     elif(suit == 'd'): suit = '♦'
@@ -27,6 +27,6 @@ class Card:
 │          {} │
 └────────────┘""".format(num,suit,num) # Basic card layout, which has the various suit options plugged in
     #cardLayout = cardLayout.join("\n")
-    print(card_layout)
+    return card_layout
 
     

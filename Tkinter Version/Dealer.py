@@ -4,7 +4,8 @@ from Player import Player
 class Dealer(Player):
 
   def print_hand(self): # Output of the dealers current hand by using data made in card and hand
-    self.hand.print(True)
+    d_arr = self.hand.print(True)
+    return d_arr
 
 
   def hit(self, player): # Adds a card to the dealers deck based on whether the deck is below 17 or not

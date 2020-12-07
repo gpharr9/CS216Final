@@ -13,7 +13,9 @@ class Player:
 
   
   def print_hand(self): # Prints out intial player hand
-    self.hand.print(False)
+    p_arr = self.hand.print(False)
+    return p_arr
+
   
 
   def collect_input(self): # Gathers unit from user

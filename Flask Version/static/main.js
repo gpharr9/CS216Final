@@ -1,7 +1,7 @@
 function init()
 {
+    // block to position the card "holders"
     let cards = document.getElementsByClassName('card-container');
-    
     let emShift = 9.5;
     for(let i = 1; i < cards.length; i++)
     {
@@ -19,17 +19,51 @@ function init()
     }
 
     request("POST", "init", null, (ev) => {
+        // parse the response as JSON
         let res = ev.response;
-        console.log(res);
-    })
+        let gameData = JSON.parse(res);
+        console.log(gameData)
 
+        // Update screen
+        update_output(gameData);
+        
+
+        // setOutput(JSON.stringify(gameData))
+    });
+
+}
+
+function update_output(data)
+{
+    let dealerCards = data.dealer.cards;
+    let playerCards = data.player.cards;
+    drawCards(dealerCards, playerCards);
+
+    // draw the count of the cards known
+    document.getElementById('pCount').innerText = `Player: ( ${data.player.count} )`;
+    document.getElementById('dCount').innerText = `Dealer: ( ${data.dealer.count} )`;
+}
+
+function drawCards(dealerCards, playerCards)
+{
+    for(let i = 0; i < dealerCards.length; i++)
+    {
+        document.getElementById(`d${i}`).children[0].innerText = dealerCards[i];
+    }
+    for(let i = 0; i < playerCards.length; i++)
+    {
+        document.getElementById(`p${i}`).children[0].innerText = playerCards[i];
+    }
 }
 
 function onHit()
 {
     request("GET", "hit", null, (ev) => {
         let res = ev.response;
-        setOutput(res);
+        let gameData = JSON.parse(res);
+        console.log(gameData)
+
+        update_output(gameData);
     });
 }
 
@@ -37,7 +71,10 @@ function onStand()
 {
     request("GET", "stand", null, (ev) => {
         let res = ev.response;
-        setOutput(res);
+        let gameData = JSON.parse(res);
+        console.log(gameData)
+
+        update_output(gameData);
     });
 }
 

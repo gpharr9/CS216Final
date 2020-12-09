@@ -17,15 +17,27 @@ class Hand:
   def print(self, dealer): # Prints out the hand, with different parameters
                            # depending on whether dealer object or player object
     length = len(self.hand)
-    c_arr = []
+    masterArr = []
     if(dealer):
       length -= 1
-      c_arr.append(self.hand[1].get_card(True))
+      sCard = self.hand[1].get_card(True).split("\n")
+      for s in range(0, len(sCard)):
+        masterArr.append(sCard[s])
 
 
     for i in range(0, length):
-      c_arr.append(self.hand[i].get_card(False))
-    return c_arr
+      sCard = self.hand[i].get_card(False).split("\n")
+      if(len(masterArr) > 0):
+        for j in range(0, len(sCard)):
+          masterArr[j] += sCard[j]
+      else:
+        for j in range(0, len(sCard)):
+          masterArr.append(sCard[j])
+
+    master = ""
+    for i in range(0, len(masterArr)):
+      master += masterArr[i]+'\n'
+    return master
 # 10 jack
 # 11 ace
 # 12 queen

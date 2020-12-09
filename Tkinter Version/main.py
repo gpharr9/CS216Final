@@ -45,7 +45,7 @@
 # Sources: https://github.com/wtran29/Blackjack-Tkinter
 
 
-from Game import Game
+from Game import *
 from os import system
 import tkinter
 from tkinter import *
@@ -59,8 +59,10 @@ class Root():
     # set the title 
     self.root.title("Black Jack Game")
 
-    # set the size 
-    self.root.geometry("500x500") 
+    # set the size
+    height = self.root.winfo_screenheight()
+    width = self.root.winfo_screenwidth()
+    self.root.geometry(str(height) + "x" + str(width))
 
 
    # add instructions label
@@ -93,48 +95,108 @@ class Root():
     return self.root
 
   def update_output(self, player, dealer):
+    p_count, d_count = self.g.get_count()
+    
+    self.display1.configure(text = "Dealer Count: " + str(d_count))
     self.display2.configure(text = dealer)
-    self.display3.configure(text = player)
+    self.display3.configure(text = "Player Count: " + str(p_count))
+    
+    self.display4.configure(text = player)
+
+
+
+  def hit(self):
+    self.g.validate_dealer()
+    self.g.p_hit()
+    player, dealer = self.g.condition()
+
+    self.update_output(player, dealer)
+
+
+  def stand(self):
+    self.g.validate_dealer()
+    self.g.p_stand()
+    player, dealer = self.g.condition()
+
+    self.update_output(player, dealer)
 
   def start_game(self):
-    state = True
-    self.display1.configure(text = "Game Started")
+    self.display1.configure(text = "Dealer Hand")
     self.display2.configure(text = "")
-    self.display3.configure(text = "")
+    self.display3.configure(text = "Player Hand")
     self.display4.configure(text = "")
     self.display5.configure(text = "")
 
-    
-    count = 0 # Sets initial turn count to zero
+    #self.display1.place(relx = 0.5, rely = 0.5)
+    #self.display2.place(relx = 125, rely = 125)
+    #self.display3.place(relx = 250, rely = 250)
+    #self.display4.place(relx = 375, rely = 375)
+    #self.prompt1.place(relx = 125, rely = 500)
+    #self.prompt1.place(relx = 375, rely = 500)
+
+    self.prompt1.configure(text = "Hit", command = self.hit)
+    self.prompt2.configure(text = "Stand", command = self.stand)
+    self.count = 0 # Sets initial turn count to zero
+    self.state = True
+    self.status = None
     #game = None # Sets initial game value to None type
-    while state == True:
-      if(count == 0):
-        g = None # Sets initial game value to None type
-        g = Game() # Creates game object
-      status = g.next() # Progresses the game
 
-      count += 1
-      if status == 0: # Monitors game state
-        print("You win!!!")
-      if state == True:
-        count = 0
-      elif status == 1: # Monitors game state
-        print("You lose.")
-      if state == True:
-        count = 0
-      elif status == 2: # Monitors game state
-        print("You tied!")
-      if state == True:
-        count = 0
+    self.next()
     
 
 
+  def win(self):
+    self.display1.configure(text = "Congratulations!")
+    self.display2.configure(text = "You win!")
+    self.display3.configure(text = "")
+    self.display4.configure(text = "")
+    self.display5.configure(text = "Would you like to play again?")
+
+    self.prompt1.configure(text = "Yes", command = self.start_game)
+    self.prompt2.configure(text = "No", command = self.root.destroy)
 
 
+  def lose(self):
+    self.display1.configure(text = ":(")
+    self.display2.configure(text = "You lose!")
+    self.display3.configure(text = "")
+    self.display4.configure(text = "")
+    self.display5.configure(text = "Would you like to play again?")
+
+    self.prompt1.configure(text = "Yes", command = self.start_game)
+    self.prompt2.configure(text = "No", command = self.root.destroy)
 
 
+  def tie(self):
+    self.display1.configure(text = "Tie game!")
+    self.display2.configure(text = "")
+    self.display3.configure(text = "")
+    self.display4.configure(text = "")
+    self.display5.configure(text = "Would you like to play again?")
 
+    self.prompt1.configure(text = "Yes", command = self.start_game)
+    self.prompt2.configure(text = "No", command = self.root.destroy)
   
+
+
+  def next(self):
+    while self.state == True:
+      if(self.count == 0):
+        self.g = None # Sets initial game value to None type
+        self.g = Game() # Creates game object
+      #status = self.g.next() # Progresses the game
+
+      player, dealer = self.g.condition()
+      self.count += 1
+      self.update_output(player, dealer)
+
+      if self.status == 0: # Monitors game state
+        self.win()
+      elif self.status == 1: # Monitors game state
+        self.lose()
+      elif self.status == 2: # Monitors game state
+        self.tie()
+
 
 def main():
   system('cls') # Clears terminal

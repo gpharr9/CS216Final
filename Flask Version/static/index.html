@@ -1,72 +1,12 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <link rel="stylesheet" href="./main.css">
-        <script src="./main.js"></script>
-    </head>
-    <body onload="init()">
-        <table align="center" cellpadding="0" cellspacing="10" border="0;">
-            <tbody>
-                <tr>
-                    <td>
-                        <div class="table">
-                            <div id="dCount" style="position: absolute; left:1em; top:2.75em; color:#c1dec1; font-size:large">Dealer:</div>
-                            <div id="d0" class="card-container" style="left: 1.5em;">
-                                <pre class="card">
-                                </pre>
-                            </div>
-                            <div id="d1" class="card-container">
-                                <pre class="card">
-                                </pre>
-                            </div>
-                            <div id="d2" class="card-container">
-                                <pre class="card">
-                                </pre>
-                            </div>
-                            <div id="d3" class="card-container">
-                                <pre class="card">
-                                </pre>
-                            </div>
-                            <div id="d4" class="card-container">
-                                <pre class="card">
-                                </pre>
-                            </div>
-                            <div id="pCount" style="position: absolute; left:1em; top:16em; color:#c1dec1; font-size:large">Player:</div>
-                            <div id="p0" class="card-container" style="left: 1.5em;">
-                                <pre class="card">
-                                </pre>
-                            </div>
-                            <div id="p1" class="card-container">
-                                <pre class="card">
-                                </pre>
-                            </div>
-                            <div id="p2" class="card-container">
-                                <pre class="card">
-                                </pre>
-                            </div>
-                            <div id="p3" class="card-container">
-                                <pre class="card">
-                                </pre>
-                            </div>
-                            <div id="p4" class="card-container">
-                                <pre class="card">
-                                </pre>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td align="center">
-                        <input type="button" id="hitBtn" value="Hit" onclick="onHit()">
-                        <input type="button" id="standBtn" value="Stand" onclick="onStand()">
-                    </td>
-                </tr>
-                <tr>
-                    <td align="center">
-                        <span id="debug">DEBUG</span>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </body>
-</html>
+<title>Blackjack Rules</title>
+<body style="background-color: #777; text-align: center; color: #eee">
+    <br>
+    <h1>RULES</h1>
+    <pre>
+        1) Blackjacks primary goal is to beat the dealers hand while keeping your hand under a total value of 21
+        2) Choosing hit will have you draw another card and add it to your total hands value
+        3) Choosing stand will lock your hand in and compare it to the dealers
+    </pre>
+    <button onclick="window.location.href += 'game';">Play</button>
+    <button onclick="window.location.href = `https://www.google.com/`;">Exit</button>
+</body>

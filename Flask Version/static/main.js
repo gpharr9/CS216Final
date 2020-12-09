@@ -35,6 +35,22 @@ function init()
 
 function update_output(data)
 {
+    if(data.master)
+    {
+        setTimeout(() => {
+            let playAgain = confirm(`${data.master} Would you like to play again?`);
+            if(playAgain)
+            {
+                window.location.reload();
+            }
+            else
+            {
+
+            }
+        }, 1000)
+        
+    }
+
     let dealerCards = data.dealer.cards;
     let playerCards = data.player.cards;
     drawCards(dealerCards, playerCards);
@@ -42,6 +58,8 @@ function update_output(data)
     // draw the count of the cards known
     document.getElementById('pCount').innerText = `Player: ( ${data.player.count} )`;
     document.getElementById('dCount').innerText = `Dealer: ( ${data.dealer.count} )`;
+
+    
 }
 
 function drawCards(dealerCards, playerCards)

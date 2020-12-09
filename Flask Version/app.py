@@ -8,6 +8,9 @@ app.game = None
 @app.route('/')
 def root():
     return app.send_static_file('./index.html')
+@app.route('/game')
+def game():
+    return app.send_static_file('./game.html')
 @app.route('/main.js')
 def script():
     return app.send_static_file('./main.js')
@@ -35,10 +38,15 @@ def bj_hit():
         game_state = generate_game_state(showAll=True)
         game_state["dealer"]["count"] = d_count
         game_state["master"] = "You Lose!"
-    elif d_count > 21 or p_count == 21:
+    if d_count > 21 or p_count == 21:
         game_state = generate_game_state(showAll=True)
         game_state["dealer"]["count"] = d_count
         game_state["master"] = "You Win!"
+
+    if p_count == d_count:
+        game_state = generate_game_state(showAll=True)
+        game_state["dealer"]["count"] = d_count
+        game_state["master"] = "Tie!"
 
     return game_state
       
@@ -55,11 +63,11 @@ def bj_stand():
         game_state = generate_game_state(showAll=True)
         game_state["dealer"]["count"] = d_count
         game_state["master"] = "You Lose!"
-    elif p_count > d_count:
+    if p_count > d_count:
         game_state = generate_game_state(showAll=True)
         game_state["dealer"]["count"] = d_count
         game_state["master"] = "You Win!"
-    elif p_count == d_count:
+    if p_count == d_count:
         game_state = generate_game_state(showAll=True)
         game_state["dealer"]["count"] = d_count
         game_state["master"] = "Tie!"

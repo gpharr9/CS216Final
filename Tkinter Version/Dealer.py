@@ -13,8 +13,3 @@ class Dealer(Player):
       player.hand.add_card()
     else:
       self.hand.add_card()
-
-  #Only used by player
-  # deprecated for now
-  # def split(self):
-  #   print('split')

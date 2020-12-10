@@ -1,6 +1,5 @@
 from Player import Player
 from Dealer import Dealer
-from Computer import Computer
 from os import system
 
 class Game:

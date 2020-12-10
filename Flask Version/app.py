@@ -34,20 +34,20 @@ def bj_hit():
     p_count, d_count = app.game.get_count(display=False)
 
     game_state = generate_game_state(showAll=False)
-    if p_count > 21:
-        game_state = generate_game_state(showAll=True)
-        game_state["dealer"]["count"] = d_count
-        game_state["master"] = "You Lose!"
     if d_count > 21 or p_count == 21:
         game_state = generate_game_state(showAll=True)
         game_state["dealer"]["count"] = d_count
         game_state["master"] = "You Win!"
+    if p_count > 21:
+        game_state = generate_game_state(showAll=True)
+        game_state["dealer"]["count"] = d_count
+        game_state["master"] = "You Lose!"
 
-    if p_count == d_count:
+    if p_count == d_count and p_count > 21:
         game_state = generate_game_state(showAll=True)
         game_state["dealer"]["count"] = d_count
         game_state["master"] = "Tie!"
-
+        
     return game_state
       
 

@@ -1,5 +1,5 @@
 # Sources: https://github.com/wtran29/Blackjack-Tkinter
-
+# This program runs a blackjack game using Tkinter as well as several different imports
 
 from Game import *
 from os import system
@@ -12,18 +12,18 @@ class Root():
     # create a GUI window 
     self.root = tkinter.Tk() 
 
-    # set the title 
+    # configuring the window
     self.root.title("Black Jack Game")
-
+    self.root.configure(bg = 'sea green')
     # set the size
     height = self.root.winfo_screenheight()
     width = self.root.winfo_screenwidth()
     self.root.geometry(str(height) + "x" + str(width))
 
 
-   # add instructions label
+   # add display labels
     self.display1 = tkinter.Label(self.root, text = "=====================================================================================================", 
-                                                  font = ('Helvetica', 12)) 
+                                                  font = ('Helvetica', 12),) 
     self.display1.pack()
 
     self.display2 = tkinter.Label(self.root, text = "1) Blackjacks primary goal is to beat the dealers hand while keeping your hand under a total value of 21", 
@@ -41,8 +41,15 @@ class Root():
     self.display5 = tkinter.Label(self.root, text = "=====================================================================================================", 
                                                   font = ('Helvetica', 12)) 
     self.display5.pack()
-    self.prompt1 = Button(self.root, text = "Play Game", command = self.start_game)
-    self.prompt2 = Button(self.root, text = "Exit Game", command = self.root.destroy)
+    
+    self.display1.configure(fg = 'light cyan', bg = 'sea green')
+    self.display2.configure(fg = 'light cyan', bg = 'sea green')
+    self.display3.configure(fg = 'light cyan', bg = 'sea green')
+    self.display4.configure(fg = 'light cyan', bg = 'sea green')
+    self.display5.configure(fg = 'light cyan', bg = 'sea green')
+    # Create buttons for user control
+    self.prompt1 = Button(self.root, text = "Play Game", command = self.start_game, bg = 'red', fg = 'white')
+    self.prompt2 = Button(self.root, text = "Exit Game", command = self.root.destroy, bg = 'red', fg = 'white')
     self.prompt1.pack()
     self.prompt2.pack()
 
@@ -50,105 +57,138 @@ class Root():
 
 
   def update_output(self, player, dealer):
-    p_count, d_count = self.g.get_count()
+    p_count = self.g.get_p_count() # getting the total value of the player hand from Game.py
 
-    self.display1.configure(text = "Dealer Count: " + str(d_count))
-    self.display2.configure(text = dealer)
-    self.display3.configure(text = "Player Count: " + str(p_count))
-    self.display4.configure(text = player)
+    self.display1.configure(text = "Dealer Hand")
+    self.display2.configure(text = dealer) # Outputting dealers cards
+    self.display3.configure(text = "Player Count: " + str(p_count)) # Telling the player their current hand value
+    self.display4.configure(text = player) # Outputting players cards
 
 
   def hit(self):
-    self.g.validate_dealer()
-    self.g.p_hit()
+    self.g.validate_dealer() # Allowing dealer to hit or stand
+    self.g.p_hit() # Allowing player to add a card to their deck
     
-    p_count, d_count = self.g.get_count()
+    # Getting the total value of the dealer and player hands from Game.py
+    p_count = self.g.get_p_count()
+    d_count = self.g.get_d_count()
 
-    if p_count > 21:
-      self.lose()
-    elif d_count > 21:
-      self.win()
-    else:
-      player, dealer = self.g.condition()
-      self.update_output(player, dealer)
+    if p_count > 21: # Testing if player has busted
+      self.lose() # Running losing parameters
+    elif d_count > 21: # Testing is the dealer has busted
+      self.win() # Running winning parameters
+    else: # If both counts are valid
+      player, dealer = self.g.condition() # Getting the hands
+      self.update_output(player, dealer) # Outputting hands to Tkinter
 
 
   def stand(self):
-    self.g.validate_dealer()
-    self.g.p_stand()
+    self.g.validate_dealer() # Allowing dealer to hit or stand
+    self.g.p_stand() # Allowing player to set final card value
     
-    
-    p_count, d_count = self.g.get_count()
-    if p_count > 21:
-      self.lose()
-    elif d_count > 21:
-      self.win()
-    elif p_count == d_count:
-      self.tie()
-    else:
-      player, dealer = self.g.condition()
-      self.update_output(player, dealer)
+    # Getting the total value of the dealer and player hands from Game.py
+    p_count = self.g.get_p_count()
+    d_count = self.g.get_d_count()
+  
+    if p_count > 21: # Testing if player has busted
+      self.lose() # Running losing parameters
+    elif d_count > 21: # Testing is the dealer has busted
+      self.win() # Running winning parameters
+    elif p_count == d_count: # Testing if there is a tie
+      self.tie() # Running tie parameters
+    else: # If both counts are valid
+      self.end_game() # Ending game with final test parameters
+
 
   def start_game(self):
-    self.display1.configure(text = "Dealer Hand")
+    # Initializing displays for game
+    self.display1.configure(text = "Dealer Hand") 
     self.display2.configure(text = "")
     self.display3.configure(text = "Player Hand")
     self.display4.configure(text = "")
     self.display5.configure(text = "")
+
+    # Updating buttons for game
     self.prompt1.configure(text = "Hit", command = self.hit)
     self.prompt2.configure(text = "Stand", command = self.stand)
 
     self.g = None # Sets initial game value to None type
-    self.g = Game()
+    self.g = Game() # Creates new game object
+    player, dealer = self.g.condition() # Gets initial dealer and player hands
+    self.update_output(player, dealer) # Outputs initial dealer and player hands
 
 
   def win(self):
-    p_count, d_count = self.g.get_count()
-    
+
+    # Getting the total value of the dealer and player hands from Game.py
+    p_count = self.g.get_p_count()
+    d_count = self.g.get_d_count()
+
+    # Outputting win parameters
     self.display1.configure(text = "Congratulations!")
     self.display2.configure(text = "You win!")
     self.display3.configure(text = "Player Count: " + str(p_count))
     self.display4.configure(text = "Dealer Count: " + str(d_count))
     self.display5.configure(text = "Would you like to play again?")
-
+    # Updating buttons to have user decide to play again or not
     self.prompt1.configure(text = "Yes", command = self.start_game)
     self.prompt2.configure(text = "No", command = self.root.destroy)
 
 
   def lose(self):
-    p_count, d_count = self.g.get_count()
-    
+
+    # Getting the total value of the dealer and player hands from Game.py
+    p_count = self.g.get_p_count()
+    d_count = self.g.get_d_count()
+
+    # Outputting losing parameters
     self.display1.configure(text = ":(")
     self.display2.configure(text = "You lose!")
     self.display3.configure(text = "Player Count: " + str(p_count))
     self.display4.configure(text = "Dealer Count: " + str(d_count))
     self.display5.configure(text = "Would you like to play again?")
-
+    # Updating buttons to have user decide to play again or not
     self.prompt1.configure(text = "Yes", command = self.start_game)
     self.prompt2.configure(text = "No", command = self.root.destroy)
 
 
+  def end_game(self):
+
+    # Getting the total value of the dealer and player hands from Game.py
+    p_count = self.g.get_p_count()
+    d_count = self.g.get_d_count()
+
+    # Testing for winner
+    if p_count > d_count:
+      self.win()
+    elif p_count < d_count:
+      self.lose()
+    elif p_count == d_count:
+      self.tie()
+
+
   def tie(self):
-    p_count, d_count = self.g.get_count()
+    
+    # Getting the total value of the dealer and player hands from Game.py
+    p_count = self.g.get_p_count()
+    d_count = self.g.get_d_count()
 
-
+    # Outputting tie game parameters
     self.display1.configure(text = "Tie game!")
     self.display3.configure(text = "Player Count: " + str(p_count))
     self.display4.configure(text = "Dealer Count: " + str(d_count))
     self.display4.configure(text = "")
     self.display5.configure(text = "Would you like to play again?")
-
+    # Updating buttons to have user decide to play again or not
     self.prompt1.configure(text = "Yes", command = self.start_game)
     self.prompt2.configure(text = "No", command = self.root.destroy)
 
 
 def main():
   system('cls') # Clears terminal
-  win = Root()
-  root = win.create_window()
-  root.mainloop()
+  win = Root() # Creates Root object
+  root = win.create_window() # Creates initial window
+  root.mainloop() # Starts the windows mainloop
 
-  # game over
-  print("Thanks for playing!")
 
 main()

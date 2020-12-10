@@ -16,16 +16,14 @@ class Card:
 
     if(blank): # Allows the hidden card on the dealer by having a no suit, no number card
       num = suit = " "
-    card_layout = """┌────────────┐
+    card_layout = """┌─────┐
 │ {}          │
-│            │
-│            │
+│             │
+│             │
 │     {}      │
-│            │
-│            │
+│             │
+│             │
 │          {} │
-└────────────┘""".format(num,suit,num) # Basic card layout, which has the various suit options plugged in
+└─────┘""".format(num,suit,num) # Basic card layout, which has the various suit options plugged in
     #cardLayout = cardLayout.join("\n")
     return card_layout
-
-    

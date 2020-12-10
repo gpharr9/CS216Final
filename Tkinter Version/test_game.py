@@ -2,15 +2,9 @@ import unittest
 from Card import *
 from Hand import *
 from Player import *
+from Dealer import *
+from Game import *
 
-# class TestGame(unittest.TestCase):
-
-#     def setUp(self):
-#         pass
-
-#     def test_constructor(self):
-#         game = Game()
-#         print(game.player_instance)
 
 class TestCard(unittest.TestCase):
     def setUp(self):
@@ -26,16 +20,15 @@ class TestCard(unittest.TestCase):
         num = '7'
         
         card_data = card.get_card(False)
-        check = """ 
-┌────────────┐   
+        check = """┌─────┐
 │ {}          │
-│            │
-│            │
+│             │
+│             │
 │     {}      │
-│            │
-│            │
+│             │
+│             │
 │          {} │
-└────────────┘""".format(num,suit,num)
+└─────┘""".format(num,suit,num)
         self.assertTrue(card_data == check, "The card data does not match...")
 
 class TestHand(unittest.TestCase):
@@ -71,6 +64,28 @@ class TestPlayer(unittest.TestCase):
         testHand.hand.append(Card(['d6']))
         player.hand = testHand
         self.assertTrue(player.count_hand() == 12, "Count hand did not properly add the hand total...")
+
+
+class TestDealer(unittest.TestCase):
+    
+    def set_up(self):
+        pass
+
+    def test_create_hand(self):
+        dealer = Dealer()
+        test_hand = dealer.create_hand()
+        self.assertTrue(type(test_hand) is Hand, "The dealer did not create a hand object...")
+
+    def test_count_hand(self):
+        dealer = Dealer()
+        test_hand = Hand()
+        test_hand.hand = []
+        test_hand.hand.append(Card(['c3']))
+        test_hand.hand.append(Card(['h3']))
+        test_hand.hand.append(Card(['d6']))
+        dealer.hand = test_hand
+        self.assertTrue(dealer.count_hand() == 12, "Count hand did not properly add the hand total...")
+
 
 if __name__ == '__main__':
     unittest.main(exit=False)

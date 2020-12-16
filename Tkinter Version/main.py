@@ -5,6 +5,8 @@ from Game import *
 from os import system
 import tkinter
 from tkinter import *
+import time
+
 
 class Root():
     
@@ -119,37 +121,33 @@ class Root():
 
 
   def win(self):
-
-    # Getting the total value of the dealer and player hands from Game.py
-    p_count = self.g.get_p_count()
-    d_count = self.g.get_d_count()
-
+    
+    time.sleep(1)
     # Outputting win parameters
-    self.display1.configure(text = "Congratulations!")
-    self.display2.configure(text = "You win!")
-    self.display3.configure(text = "Player Count: " + str(p_count))
-    self.display4.configure(text = "Dealer Count: " + str(d_count))
-    self.display5.configure(text = "Would you like to play again?")
+    player, dealer = self.g.condition()
+    self.display1.configure(text = "You win!")
+    self.display4.configure(text = "Dealer Hand")
+    self.display5.configure(text = dealer)
+    self.display2.configure(text = "Player Hand")
+    self.display3.configure(text = player)
     # Updating buttons to have user decide to play again or not
-    self.prompt1.configure(text = "Yes", command = self.start_game)
-    self.prompt2.configure(text = "No", command = self.root.destroy)
+    self.prompt1.configure(text = "Play Again", command = self.start_game)
+    self.prompt2.configure(text = "Quit", command = self.root.destroy)
 
 
   def lose(self):
-
-    # Getting the total value of the dealer and player hands from Game.py
-    p_count = self.g.get_p_count()
-    d_count = self.g.get_d_count()
-
-    # Outputting losing parameters
-    self.display1.configure(text = ":(")
-    self.display2.configure(text = "You lose!")
-    self.display3.configure(text = "Player Count: " + str(p_count))
-    self.display4.configure(text = "Dealer Count: " + str(d_count))
-    self.display5.configure(text = "Would you like to play again?")
+    
+    time.sleep(1)
+    player, dealer = self.g.condition()
+    # Outputting lose parameters
+    self.display1.configure(text = "You lose :(")
+    self.display4.configure(text = "Dealer Hand")
+    self.display5.configure(text = dealer)
+    self.display2.configure(text = "Player Hand")
+    self.display3.configure(text = player)
     # Updating buttons to have user decide to play again or not
-    self.prompt1.configure(text = "Yes", command = self.start_game)
-    self.prompt2.configure(text = "No", command = self.root.destroy)
+    self.prompt1.configure(text = "Play Again", command = self.start_game)
+    self.prompt2.configure(text = "Quit", command = self.root.destroy)
 
 
   def end_game(self):
@@ -157,31 +155,30 @@ class Root():
     # Getting the total value of the dealer and player hands from Game.py
     p_count = self.g.get_p_count()
     d_count = self.g.get_d_count()
-
+    time.sleep(1)
     # Testing for winner
     if p_count > d_count:
       self.win()
     elif p_count < d_count:
-      self.lose()
+        self.lose()
     elif p_count == d_count:
-      self.tie()
+        self.tie()
+
 
 
   def tie(self):
     
-    # Getting the total value of the dealer and player hands from Game.py
-    p_count = self.g.get_p_count()
-    d_count = self.g.get_d_count()
-
-    # Outputting tie game parameters
-    self.display1.configure(text = "Tie game!")
-    self.display3.configure(text = "Player Count: " + str(p_count))
-    self.display4.configure(text = "Dealer Count: " + str(d_count))
-    self.display4.configure(text = "")
-    self.display5.configure(text = "Would you like to play again?")
+    time.sleep(1)
+    player, dealer = self.g.condition()
+    # Outputting tie parameters
+    self.display1.configure(text = "Tie Game")
+    self.display4.configure(text = "Dealer Hand")
+    self.display5.configure(text = dealer)
+    self.display2.configure(text = "Player Hand")
+    self.display3.configure(text = player)
     # Updating buttons to have user decide to play again or not
-    self.prompt1.configure(text = "Yes", command = self.start_game)
-    self.prompt2.configure(text = "No", command = self.root.destroy)
+    self.prompt1.configure(text = "Play Again", command = self.start_game)
+    self.prompt2.configure(text = "Quit", command = self.root.destroy)
 
 
 def main():

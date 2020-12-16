@@ -59,11 +59,10 @@ class Root():
 
 
   def update_output(self, player, dealer):
-    p_count = self.g.get_p_count() # getting the total value of the player hand from Game.py
 
     self.display1.configure(text = "Dealer Hand")
     self.display2.configure(text = dealer) # Outputting dealers cards
-    self.display3.configure(text = "Player Count: " + str(p_count)) # Telling the player their current hand value
+    self.display3.configure(text = "Player Hand") # Telling the player their current hand value
     self.display4.configure(text = player) # Outputting players cards
 
 
@@ -126,10 +125,10 @@ class Root():
     # Outputting win parameters
     player, dealer = self.g.condition()
     self.display1.configure(text = "You win!")
-    self.display4.configure(text = "Dealer Hand")
-    self.display5.configure(text = dealer)
-    self.display2.configure(text = "Player Hand")
-    self.display3.configure(text = player)
+    self.display2.configure(text = "Dealer Hand")
+    self.display3.configure(text = dealer)
+    self.display4.configure(text = "Player Hand")
+    self.display5.configure(text = player)
     # Updating buttons to have user decide to play again or not
     self.prompt1.configure(text = "Play Again", command = self.start_game)
     self.prompt2.configure(text = "Quit", command = self.root.destroy)
@@ -141,10 +140,10 @@ class Root():
     player, dealer = self.g.condition()
     # Outputting lose parameters
     self.display1.configure(text = "You lose :(")
-    self.display4.configure(text = "Dealer Hand")
-    self.display5.configure(text = dealer)
-    self.display2.configure(text = "Player Hand")
-    self.display3.configure(text = player)
+    self.display2.configure(text = "Dealer Hand")
+    self.display3.configure(text = dealer)
+    self.display4.configure(text = "Player Hand")
+    self.display5.configure(text = player)
     # Updating buttons to have user decide to play again or not
     self.prompt1.configure(text = "Play Again", command = self.start_game)
     self.prompt2.configure(text = "Quit", command = self.root.destroy)
@@ -172,10 +171,10 @@ class Root():
     player, dealer = self.g.condition()
     # Outputting tie parameters
     self.display1.configure(text = "Tie Game")
-    self.display4.configure(text = "Dealer Hand")
-    self.display5.configure(text = dealer)
-    self.display2.configure(text = "Player Hand")
-    self.display3.configure(text = player)
+    self.display2.configure(text = "Dealer Hand")
+    self.display3.configure(text = dealer)
+    self.display4.configure(text = "Player Hand")
+    self.display5.configure(text = player)
     # Updating buttons to have user decide to play again or not
     self.prompt1.configure(text = "Play Again", command = self.start_game)
     self.prompt2.configure(text = "Quit", command = self.root.destroy)
